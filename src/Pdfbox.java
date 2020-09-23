@@ -44,7 +44,7 @@ public class Pdfbox
 		
 	}
 	public static void AddText(PDDocument document,int pageIndex,int posX,int posY,
-			String text,PDType1Font font) throws IOException
+			String text,PDType1Font font,int policeSize) throws IOException
 	{
 		PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(pageIndex));
 	      
@@ -52,7 +52,7 @@ public class Pdfbox
 	    contentStream.beginText(); 
 	       
 	    
-	    contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+	    contentStream.setFont(font, policeSize); // PDType1Font.TIMES_ROMAN is an example of font
 
 	
 	    contentStream.newLineAtOffset(posX, posY);
