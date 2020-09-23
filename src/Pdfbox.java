@@ -26,13 +26,14 @@ public class Pdfbox
 		
 		return document;
 	}
-	public static void DocumentToImage(PDDocument document,int pageIndex,PDRectangle region,String imagePath)
+	public static void DocumentToImage(PDDocument document,int pageIndex,PDRectangle region,String imagePath) throws IOException
 	{
 		PDFRenderer pdfRenderer = new PDFRenderer(document);
 		PDPage page = document.getPage(pageIndex);
 		page.setCropBox(region);
 		
-		BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
+		
+		BufferedImage bim = pdfRenderer.renderImageWithDPI(pageIndex, 300, ImageType.RGB);
 
 		    // suffix in filename will be used as the file format
 		ImageIOUtil.writeImage(bim, imagePath + ".png", 300);
