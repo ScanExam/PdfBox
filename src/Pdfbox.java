@@ -38,10 +38,10 @@ public class Pdfbox
 		
 		BufferedImage bim = pdfRenderer.renderImageWithDPI(pageIndex, 300, ImageType.RGB);
 
-		    // suffix in filename will be used as the file format
 		ImageIOUtil.writeImage(bim, imagePath + ".png", 300);
 		
 		bim.flush();
+		
 	}
 	public static void AddText(PDDocument document,int pageIndex,int posX,int posY,
 			String text,PDType1Font font) throws IOException
@@ -64,6 +64,17 @@ public class Pdfbox
 	    contentStream.endText();
 
 	   
+	    contentStream.close();
+	}
+	public static void DrawImage(PDDocument document,int pageIndex,String imagePath,int x,int y) throws IOException
+	{
+		PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(pageIndex));
+	      
+	    PDImageXObject pdImage = PDImageXObject.createFromFile(imagePath, document);
+	    
+	  
+	    contentStream.drawImage(pdImage, x, y);
+
 	    contentStream.close();
 	}
 }
