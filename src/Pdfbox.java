@@ -4,7 +4,10 @@ import java.io.IOException;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
@@ -39,5 +42,28 @@ public class Pdfbox
 		ImageIOUtil.writeImage(bim, imagePath + ".png", 300);
 		
 		bim.flush();
+	}
+	public static void AddText(PDDocument document,int pageIndex,int posX,int posY,
+			String text,PDType1Font font) throws IOException
+	{
+		PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(pageIndex));
+	      
+		  
+	    contentStream.beginText(); 
+	       
+	    
+	    contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+
+	
+	    contentStream.newLineAtOffset(posX, posY);
+	    
+ 
+	    contentStream.showText(text);      
+	   
+	    
+	    contentStream.endText();
+
+	   
+	    contentStream.close();
 	}
 }
